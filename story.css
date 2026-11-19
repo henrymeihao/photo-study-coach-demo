@@ -1,0 +1,72 @@
+/* Explainer video layout: fixed 16:9 or 9:16 screen, no scrolling. */
+html, body.st { height: 100%; overflow: hidden; }
+body.st { scrollbar-width: none; }
+.st-frame { height: 100vh; display: grid; grid-template-rows: auto 1fr auto; gap: 2.4vh; padding: 4vh 4vw 3vh; }
+.st-head { display: flex; gap: 1.6vw; align-items: center; min-height: 13vh; transition: opacity .35s, transform .35s; }
+.st-num { flex: none; display: grid; place-items: center; width: 7.5vh; height: 7.5vh; border-radius: 50%; border: 2px solid var(--accent); color: var(--accent); font: 600 4vh/1 var(--serif); }
+.st-num:empty { visibility: hidden; }
+.st-head h2 { font: 600 5.4vh/1.25 var(--serif); margin: 0; }
+.st-head p { margin: .6vh 0 0; color: var(--muted); font-size: 2.6vh; }
+.st-body { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 3.5vw; align-items: center; min-height: 0; }
+.st-photo { width: min(100%, calc(68vh * var(--ar, 1.5))); justify-self: center; }
+.st-photo .tag { font-size: 1.9vh; }
+.st-panel { transition: opacity .35s, transform .35s; font-size: 3.5vh; line-height: 1.55; }
+.swap .st-head, .swap .st-panel { opacity: 0; transform: translateY(1.2vh); }
+.st-label { color: var(--muted); font-size: 2.5vh; letter-spacing: .06em; margin: 0 0 1.2vh; display: flex; gap: .8vw; align-items: center; }
+.st-panel blockquote { margin: 0; font: 500 3.9vh/1.6 var(--serif); border-left: 3px solid var(--accent); padding-left: 1.6vw; }
+.st-note { color: var(--accent); font-size: 2.6vh; margin-top: 2vh; }
+.st-lesson { font: 600 5.4vh/1.35 var(--serif); margin: 0 0 2vh; }
+.st-why { color: #d6d0c5; margin: 0 0 1.6vh; }
+.st-ev { display: flex; gap: 1.2vw; animation: rise .45s ease-out; }
+.st-ev > b { flex: none; display: grid; place-items: center; width: 5vh; height: 5vh; border-radius: 50%; background: var(--accent); color: var(--bg); font-size: 2.6vh; }
+.st-ev strong { display: block; font: 600 4vh/1.4 var(--serif); }
+.st-ev p { color: #d6d0c5; margin: 1vh 0 0; }
+.st-panel .chips span { font-size: 2vh; }
+.st-panel .chips b { font-size: 2.5vh; }
+.st-panel .setup { background: var(--panel); }
+.st-panel .setup svg { max-height: 38vh; }
+.st-panel .four { gap: 2vh; }
+.st-panel .four li > span { width: 4.4vh; height: 4.4vh; }
+.st-panel .four b { font-size: 2.6vh; }
+.st-panel .four p { font-size: 2.7vh; line-height: 1.45; }
+.dense .st-body { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
+.st-panel .ab p, .st-panel .tradeoff div { font-size: 3vh; }
+.st-brand { display: flex; gap: .8vw; align-items: center; color: var(--muted); font-size: 1.9vh; }
+.st-brand .brand-mark { width: 2.6vh; height: 2.6vh; }
+.st-brand .brand-mark::after { inset: .55vh; }
+.st-cover { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 8vw; background: var(--bg); opacity: 0; pointer-events: none; transition: opacity .5s; text-align: center; }
+.st-cover.show { opacity: 1; }
+.st-hook h1 { font: 600 8vh/1.25 var(--serif); margin: 0 0 3vh; white-space: pre-line; }
+.st-hook p { color: var(--muted); font-size: 3vh; margin: 0; }
+.st-hook.outro h1 { font-size: 7vh; color: var(--accent); }
+.st-hook .how { color: var(--text); text-align: left; font-size: 2.8vh; margin: 1.6vh auto 0; padding: 1.6vh 2.4vw; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); max-width: 900px; }
+
+/* Portrait (9:16): title on top, photo, then the card. */
+@media (max-aspect-ratio: 1/1) {
+  .st-frame { padding: 5vh 6vw 3vh; gap: 2vh; }
+  .st-head { min-height: 11vh; gap: 4vw; }
+  .st-head h2 { font-size: 3.6vh; }
+  .st-head p { font-size: 1.9vh; }
+  .st-num { width: 6vh; height: 6vh; font-size: 3.2vh; }
+  .st-body { display: flex; flex-direction: column; align-items: stretch; gap: 2.4vh; overflow: hidden; }
+  .st-photo { flex: none; align-self: center; width: min(100%, calc(34vh * var(--ar, 1.5))); transition: width .4s ease; }
+  .dense .st-photo { width: min(100%, calc(20vh * var(--ar, 1.5))); }
+  .dense .st-panel .chips { margin: 1vh 0; }
+  .dense .st-panel .chips b { font-size: 1.8vh; }
+  .dense .st-panel .setup { padding: 1vh 3vw .4vh; margin-top: 1vh; }
+  .dense .st-panel .setup svg { max-height: 25vh; }
+  .st-panel { flex: 1; min-height: 0; }
+  .st-panel { font-size: 2vh; }
+  .st-photo .tag { font-size: 1.3vh; }
+  .st-panel blockquote { font-size: 2.5vh; padding-left: 4vw; }
+  .st-lesson { font-size: 3.4vh; }
+  .st-ev strong { font-size: 2.6vh; }
+  .st-label, .st-note { font-size: 1.7vh; }
+  .st-panel .four { gap: 1.4vh; }
+  .st-panel .ab p { font-size: 1.8vh; }
+  .st-panel .setup svg { max-height: 22vh; }
+  .st-hook h1 { font-size: 5vh; }
+  .st-hook p { font-size: 2.2vh; }
+  .st-hook .how { font-size: 1.9vh; padding: 1.4vh 4vw; }
+  .st-brand { font-size: 1.5vh; }
+}
