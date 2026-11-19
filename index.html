@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="static">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Photography Coach</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <button class="brand" id="home" type="button">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span><b>AI Photography Coach</b><small data-i18n="brandSub"></small></span>
+    </button>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="zh">中</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+  </header>
+
+  <main id="landing" class="landing">
+    <p class="eyebrow" data-i18n="eyebrow"></p>
+    <h1 data-i18n="headline"></h1>
+    <p class="lede" data-i18n="lede"></p>
+
+    <label class="drop" id="drop">
+      <input id="file" type="file" accept="image/jpeg,image/png,image/webp" hidden />
+      <span class="drop-icon" aria-hidden="true"></span>
+      <span class="drop-title" data-i18n="dropTitle"></span>
+      <span class="drop-hint" data-i18n="dropHint"></span>
+    </label>
+
+    <div class="options">
+      <div class="seg" role="group">
+        <button type="button" data-owner="reference" class="on" data-i18n="ownerRef"></button>
+        <button type="button" data-owner="mine" data-i18n="ownerMine"></button>
+      </div>
+      <input id="intent" class="intent" maxlength="60" data-i18n-placeholder="intentPh" />
+    </div>
+
+    <section class="samples">
+      <p data-i18n="samples"></p>
+      <div id="sampleList" class="sample-list"></div>
+    </section>
+
+    <section id="cta" class="cta" hidden>
+      <p class="cta-title" data-i18n="ctaTitle"></p>
+      <p class="cta-text" data-i18n="ctaText"></p>
+      <div class="cta-actions">
+        <a id="ctaSkill" class="cta-btn primary" target="_blank" rel="noopener" data-i18n="ctaSkill"></a>
+        <button id="ctaCopy" type="button" class="cta-btn" data-i18n="ctaCopy"></button>
+      </div>
+    </section>
+  </main>
+
+  <main id="studio" class="studio" hidden>
+    <section class="stage-col">
+      <div class="stage" id="stage">
+        <img id="photo" alt="" />
+        <svg id="overlay" class="overlay" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"></svg>
+        <div id="labels" class="labels"></div>
+        <div class="scan" id="scan"></div>
+      </div>
+      <div class="stage-bar">
+        <span class="legend"><i class="solid"></i><span data-i18n="legendSeen"></span><i class="dash"></i><span data-i18n="legendGuess"></span></span>
+        <button type="button" id="toggleMarks" class="ghost" data-i18n="toggleMarks"></button>
+      </div>
+    </section>
+
+    <section class="card-col" id="card">
+      <ol class="progress" id="progress"></ol>
+      <div id="sections"></div>
+    </section>
+  </main>
+
+  <footer class="foot" data-i18n="foot"></footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
