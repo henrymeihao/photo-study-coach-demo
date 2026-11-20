@@ -40,18 +40,18 @@ body.st { scrollbar-width: none; }
 .st-hook.outro h1 { font-size: 7vh; color: var(--accent); }
 .st-hook .how { color: var(--text); text-align: left; font-size: 2.8vh; margin: 1.6vh auto 0; padding: 1.6vh 2.4vw; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); max-width: 900px; }
 
-/* Portrait (9:16, Xiaohongshu): everything sits in the top ~74% and away from the right edge,
-   because the app overlays the caption, author name and like/comment buttons there.
+/* Portrait (9:16, Xiaohongshu): everything sits in the top ~74%,
+   because the app overlays the caption and author name at the bottom. Layout is symmetric left and right.
    The photo has a fixed size and position on every screen so nothing jumps between points. */
 @media (max-aspect-ratio: 1/1) {
-  .st-frame { display: block; height: 100vh; padding: 7vh 14vw 0 6vw; }
-  .st-brand { position: absolute; top: 2.6vh; left: 6vw; font-size: 1.5vh; }
-  .st-head { height: 9vh; gap: 3vw; margin-bottom: 1.6vh; }
+  .st-frame { display: block; height: 100vh; padding: 7vh 6vw 0; }
+  .st-brand { position: absolute; top: 2.6vh; left: 0; right: 0; justify-content: center; font-size: 1.5vh; }
+  .st-head { height: 9vh; gap: 3vw; margin-bottom: 1.6vh; justify-content: center; }
   .st-head h2 { font-size: 3vh; }
   .st-head p { font-size: 1.6vh; }
   .st-num { width: 5.4vh; height: 5.4vh; font-size: 2.8vh; }
   .st-body { display: block; }
-  .st-photo { width: min(100%, calc(24vh * var(--ar, 1.5))); margin: 0 auto 2vh 0; }
+  .st-photo { width: min(100%, calc(24vh * var(--ar, 1.5))); margin: 0 auto 2vh; }
   .st-photo .tag { font-size: 1.15vh; }
   .st-panel { height: 29vh; overflow: hidden; font-size: 1.85vh; line-height: 1.5; }
   .st-panel blockquote { font-size: 2.2vh; padding-left: 3vw; }
@@ -74,7 +74,7 @@ body.st { scrollbar-width: none; }
   .st-panel .ab b { font-size: 2.4vh; }
   .st-panel .ab p { font-size: 1.65vh; line-height: 1.4; }
   .st-panel .check { font-size: 1.65vh; }
-  .st-cover { place-items: start center; padding: 22vh 14vw 0 8vw; }
+  .st-cover { place-items: start center; padding: 22vh 7vw 0; }
   .st-hook h1 { font-size: 4.4vh; }
   .st-hook p { font-size: 2vh; }
   .st-hook.outro h1 { font-size: 4.4vh; }
