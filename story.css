@@ -2,12 +2,12 @@
 html, body.st { height: 100%; overflow: hidden; }
 body.st { scrollbar-width: none; }
 .st-frame { height: 100vh; display: grid; grid-template-rows: auto 1fr auto; gap: 2.4vh; padding: 4vh 4vw 3vh; }
-.st-head { display: flex; gap: 1.6vw; align-items: center; min-height: 13vh; transition: opacity .35s, transform .35s; }
+.st-head { display: flex; gap: 1.6vw; align-items: center; height: 13vh; transition: opacity .35s, transform .35s; }
 .st-num { flex: none; display: grid; place-items: center; width: 7.5vh; height: 7.5vh; border-radius: 50%; border: 2px solid var(--accent); color: var(--accent); font: 600 4vh/1 var(--serif); }
 .st-num:empty { visibility: hidden; }
 .st-head h2 { font: 600 5.4vh/1.25 var(--serif); margin: 0; }
 .st-head p { margin: .6vh 0 0; color: var(--muted); font-size: 2.6vh; }
-.st-body { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 3.5vw; align-items: center; min-height: 0; }
+.st-body { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 3.5vw; align-items: start; min-height: 0; overflow: hidden; }
 .st-photo { width: min(100%, calc(68vh * var(--ar, 1.5))); justify-self: center; }
 .st-photo .tag { font-size: 1.9vh; }
 .st-panel { transition: opacity .35s, transform .35s; font-size: 3.5vh; line-height: 1.55; }
@@ -29,7 +29,6 @@ body.st { scrollbar-width: none; }
 .st-panel .four li > span { width: 4.4vh; height: 4.4vh; }
 .st-panel .four b { font-size: 2.6vh; }
 .st-panel .four p { font-size: 2.7vh; line-height: 1.45; }
-.dense .st-body { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
 .st-panel .ab p, .st-panel .tradeoff div { font-size: 3vh; }
 .st-brand { display: flex; gap: .8vw; align-items: center; color: var(--muted); font-size: 1.9vh; }
 .st-brand .brand-mark { width: 2.6vh; height: 2.6vh; }
@@ -41,32 +40,43 @@ body.st { scrollbar-width: none; }
 .st-hook.outro h1 { font-size: 7vh; color: var(--accent); }
 .st-hook .how { color: var(--text); text-align: left; font-size: 2.8vh; margin: 1.6vh auto 0; padding: 1.6vh 2.4vw; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); max-width: 900px; }
 
-/* Portrait (9:16): title on top, photo, then the card. */
+/* Portrait (9:16, Xiaohongshu): everything sits in the top ~74% and away from the right edge,
+   because the app overlays the caption, author name and like/comment buttons there.
+   The photo has a fixed size and position on every screen so nothing jumps between points. */
 @media (max-aspect-ratio: 1/1) {
-  .st-frame { padding: 5vh 6vw 3vh; gap: 2vh; }
-  .st-head { min-height: 11vh; gap: 4vw; }
-  .st-head h2 { font-size: 3.6vh; }
-  .st-head p { font-size: 1.9vh; }
-  .st-num { width: 6vh; height: 6vh; font-size: 3.2vh; }
-  .st-body { display: flex; flex-direction: column; align-items: stretch; gap: 2.4vh; overflow: hidden; }
-  .st-photo { flex: none; align-self: center; width: min(100%, calc(34vh * var(--ar, 1.5))); transition: width .4s ease; }
-  .dense .st-photo { width: min(100%, calc(20vh * var(--ar, 1.5))); }
-  .dense .st-panel .chips { margin: 1vh 0; }
-  .dense .st-panel .chips b { font-size: 1.8vh; }
-  .dense .st-panel .setup { padding: 1vh 3vw .4vh; margin-top: 1vh; }
-  .dense .st-panel .setup svg { max-height: 25vh; }
-  .st-panel { flex: 1; min-height: 0; }
-  .st-panel { font-size: 2vh; }
-  .st-photo .tag { font-size: 1.3vh; }
-  .st-panel blockquote { font-size: 2.5vh; padding-left: 4vw; }
-  .st-lesson { font-size: 3.4vh; }
-  .st-ev strong { font-size: 2.6vh; }
-  .st-label, .st-note { font-size: 1.7vh; }
-  .st-panel .four { gap: 1.4vh; }
-  .st-panel .ab p { font-size: 1.8vh; }
-  .st-panel .setup svg { max-height: 22vh; }
-  .st-hook h1 { font-size: 5vh; }
-  .st-hook p { font-size: 2.2vh; }
-  .st-hook .how { font-size: 1.9vh; padding: 1.4vh 4vw; }
-  .st-brand { font-size: 1.5vh; }
+  .st-frame { display: block; height: 100vh; padding: 7vh 14vw 0 6vw; }
+  .st-brand { position: absolute; top: 2.6vh; left: 6vw; font-size: 1.5vh; }
+  .st-head { height: 9vh; gap: 3vw; margin-bottom: 1.6vh; }
+  .st-head h2 { font-size: 3vh; }
+  .st-head p { font-size: 1.6vh; }
+  .st-num { width: 5.4vh; height: 5.4vh; font-size: 2.8vh; }
+  .st-body { display: block; }
+  .st-photo { width: min(100%, calc(24vh * var(--ar, 1.5))); margin: 0 auto 2vh 0; }
+  .st-photo .tag { font-size: 1.15vh; }
+  .st-panel { height: 29vh; overflow: hidden; font-size: 1.85vh; line-height: 1.5; }
+  .st-panel blockquote { font-size: 2.2vh; padding-left: 3vw; }
+  .st-lesson { font-size: 2.9vh; margin-bottom: 1.2vh; }
+  .st-why { margin-bottom: 1vh; }
+  .st-ev strong { font-size: 2.3vh; }
+  .st-ev > b { width: 3.6vh; height: 3.6vh; font-size: 1.9vh; }
+  .st-label, .st-note { font-size: 1.6vh; }
+  .st-panel .chips { margin: .8vh 0; gap: 1.2vw; }
+  .st-panel .chips span { font-size: 1.4vh; padding: .6vh 2vw; }
+  .st-panel .chips b { font-size: 1.7vh; }
+  .st-panel .setup { padding: .8vh 3vw .2vh; margin-top: .8vh; }
+  .st-panel .setup-head { font-size: 1.4vh; }
+  .st-panel .setup svg { max-height: 13vh; }
+  .st-panel .four { gap: 1vh; }
+  .st-panel .four li > span { width: 3.2vh; height: 3.2vh; font-size: 1.6vh; }
+  .st-panel .four b { font-size: 1.7vh; display: inline; margin-right: 1.5vw; }
+  .st-panel .four p { font-size: 1.7vh; line-height: 1.45; display: inline; }
+  .st-panel .ab { margin: .8vh 0; gap: 2vw; }
+  .st-panel .ab b { font-size: 2.4vh; }
+  .st-panel .ab p { font-size: 1.65vh; line-height: 1.4; }
+  .st-panel .check { font-size: 1.65vh; }
+  .st-cover { place-items: start center; padding: 22vh 14vw 0 8vw; }
+  .st-hook h1 { font-size: 4.4vh; }
+  .st-hook p { font-size: 2vh; }
+  .st-hook.outro h1 { font-size: 4.4vh; }
+  .st-hook .how { font-size: 1.75vh; padding: 1.2vh 3.5vw; margin-top: 1.2vh; }
 }

@@ -33,11 +33,9 @@ const cover = async (html, ms, { keep = false } = {}) => {
   $('#cover').classList.remove('show');
   await sleep(600);
 };
-// dense: the card is long (light plan, steps, A/B), so portrait screens shrink the photo to make room.
-const point = async (n, [title, sub], panel, { dense = false } = {}) => {
+const point = async (n, [title, sub], panel) => {
   document.body.classList.add('swap');
   await sleep(350);
-  document.body.classList.toggle('dense', dense);
   $('#num').textContent = n;
   $('#title').textContent = title;
   $('#sub').textContent = sub;
@@ -50,6 +48,8 @@ const highlight = (i) => {
   $('#stage').classList.toggle('focus', i !== null);
 };
 const level = (l) => (l ? `<span class="lvl lvl-${esc(l)}">${t.level[l] || esc(l)}</span>` : '');
+// Portrait screens drop the longest lines so the card fits above the app's bottom overlay.
+const PORTRAIT = matchMedia('(max-aspect-ratio: 1/1)').matches;
 
 await cover(`<div class="st-hook"><h1>${s.hook}</h1><p>${s.hookSub}</p></div>`, 3200);
 
@@ -71,15 +71,17 @@ for (const e of (d.evidence.items || []).slice(0, 3)) {
 highlight(null);
 
 marks(false);
-await point('4', s.c4, `<p class="st-why">${esc(d.light.summary)}</p><div class="chips"><span>${t.lightDir}<b>${esc(d.light.direction)}</b></span><span>${t.lightQuality}<b>${t.quality[d.light.quality] || esc(d.light.quality)}</b></span><span>${t.lightContrast}<b>${t.contrast[d.light.contrast] || esc(d.light.contrast)}</b></span></div><div class="setup" data-setup hidden></div>`, { dense: true });
+const dirChip = PORTRAIT ? '' : `<span>${t.lightDir}<b>${esc(d.light.direction)}</b></span>`;
+await point('4', s.c4, `<p class="st-why">${esc(d.light.summary)}</p><div class="chips">${dirChip}<span>${t.lightQuality}<b>${t.quality[d.light.quality] || esc(d.light.quality)}</b></span><span>${t.lightContrast}<b>${t.contrast[d.light.contrast] || esc(d.light.contrast)}</b></span></div><div class="setup" data-setup hidden></div>`);
 drawSetup($('[data-setup]'), d.light.setup, t);
 await sleep(5600);
 
 marks(false);
-await point('5', s.c5, `<ol class="four">${t.fourSteps.map(([k, f], i) => `<li><span>${i + 1}</span><div><b>${k}</b><p>${esc(d.steps[f])}</p></div></li>`).join('')}</ol>`, { dense: true });
+await point('5', s.c5, `<ol class="four">${t.fourSteps.map(([k, f], i) => `<li><span>${i + 1}</span><div><b>${k}</b><p>${esc(d.steps[f])}</p></div></li>`).join('')}</ol>`);
 await sleep(7000);
 
-await point('6', s.c6, `<p class="st-label">${t.change}</p><p class="st-why">${esc(d.counter.change)}</p><div class="ab"><div><b>A</b><p>${esc(d.practice.a)}</p></div><div><b>B</b><p>${esc(d.practice.b)}</p></div></div><p class="check">✓ ${esc(d.practice.check)}</p>`, { dense: true });
+const changeLine = PORTRAIT ? '' : `<p class="st-label">${t.change}</p><p class="st-why">${esc(d.counter.change)}</p>`;
+await point('6', s.c6, `${changeLine}<div class="ab"><div><b>A</b><p>${esc(d.practice.a)}</p></div><div><b>B</b><p>${esc(d.practice.b)}</p></div></div><p class="check">✓ ${esc(d.practice.check)}</p>`);
 await sleep(6400);
 
 await cover(`<div class="st-hook outro"><h1>${s.outro}</h1>${s.how.map((h) => `<p class="how">${h}</p>`).join('')}</div>`, 5600, { keep: true });
